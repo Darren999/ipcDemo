@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,7 @@ import com.darren.proxystub.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
+    private TextView tvStatus;
     private Button btnStart;
     private Button btnStop;
     private PlayerProxy mPlayerProxy;
@@ -51,10 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView(){
+        tvStatus = findViewById(R.id.tv_status);
         btnStart = findViewById(R.id.btn_start);
         btnStop = findViewById(R.id.btn_stop);
 
 
+        tvStatus.setText("stop");
         btnStart.setOnClickListener(this);
         btnStop.setOnClickListener(this);
     }
@@ -65,11 +69,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_start:
                 if(mPlayerProxy != null){
                     mPlayerProxy.play();
+                    tvStatus.setText(mPlayerProxy.getStatus());
                 }
                 break;
             case R.id.btn_stop:
                 if(mPlayerProxy != null){
                     mPlayerProxy.stop();
+                    tvStatus.setText(mPlayerProxy.getStatus());
                 }
                 break;
         }

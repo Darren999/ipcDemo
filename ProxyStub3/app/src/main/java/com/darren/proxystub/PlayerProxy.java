@@ -8,6 +8,7 @@ import android.util.Log;
 public class PlayerProxy implements IPlayer {
     private static final String TAG = "PlayerProxy";
     private IBinder mIBinder;
+    private String mStatus;
 
     public PlayerProxy(IBinder iBinder){
         this.mIBinder = iBinder;
@@ -23,6 +24,7 @@ public class PlayerProxy implements IPlayer {
 
         try {
             mIBinder.transact(1,data,reply,0);
+            mStatus = reply.readString();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -38,8 +40,14 @@ public class PlayerProxy implements IPlayer {
 
         try {
             mIBinder.transact(2,data,reply,0);
+            mStatus = reply.readString();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String getStatus() {
+        return mStatus;
     }
 }

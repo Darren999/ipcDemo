@@ -29,4 +29,8 @@ public class Mp3Binder extends PlayerStub {
             mPlayer = null;
         }
     }
+
+    public String getStatus(){
+        return null;
+    }
 }

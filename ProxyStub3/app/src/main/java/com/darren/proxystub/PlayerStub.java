@@ -22,4 +22,5 @@ public abstract class PlayerStub extends Binder implements IPlayer {
 
     public abstract void play();
     public abstract void stop();
+    public abstract String getStatus();
 }
